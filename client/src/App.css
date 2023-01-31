@@ -16,6 +16,16 @@
   font-size: calc(10px + 2vmin);
 }
 
+.colorButton{
+  border-radius:10px;
+  border-style:solid;
+}
+
+.examImage{
+  height:100px;
+}
+
+
 .App-link {
   color: #61dafb;
 }
