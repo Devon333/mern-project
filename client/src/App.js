@@ -1,8 +1,28 @@
 import './App.css';
 
 import { useApi } from './hooks/use-api';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import axios from "axios";
 
+function Effect(){
+  const [data,setData] = useState("");
+
+  useEffect(() =>{
+  axios
+    .get("https://jsonplaceholder.typicode.com/comments")
+    .then((response)=>{
+      console.log(response.data);
+      if(data !== response.data){
+        setData(response.data);
+    }
+    })
+  },[]);
+  return (
+   <ul>
+     { data.map(dat => <li postid={dat.postId}> userId={dat.id} name={dat.name} </li>)}
+   </ul>
+   );
+}
 
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
@@ -55,6 +75,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <ColorButton/>
+        <p>
+          <Effect/>
+        </p>
         <p>
           <ExamTable/>
         </p>
