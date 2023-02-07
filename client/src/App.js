@@ -5,23 +5,7 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 
 function Effect(){
-  const [data,setData] = useState('');
-  const [content,setContent]=useState({});
-
-  const handleClick=(value)=>{
-    let test = String(value);
-    console.log(value);
-    axios
-    .get(test)
-    .then((response)=> {
-      console.log(response.data);
-      setContent((response.data.sprites));
-    })
-    return(
-      console.log("done here")
-    );  
-  };
-
+  const [data,setData] = useState([]);
 
   useEffect(() =>{
   axios
@@ -32,7 +16,7 @@ function Effect(){
     }
       console.log(response.data);
     })
-  },[]);
+  },[data]);
   return(
     <div className="dataContainer">
     {data.map((exam)=> <div>{exam.examId}    {exam.patientId}  {exam.age}   <img className='examImage' src={exam.imageURL}/> </div>)}
@@ -40,9 +24,6 @@ function Effect(){
   );
 }
 
-const ApiCall=()=>{
-  console.log("Test");
-}
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 2, notes:'Pots',image:"images/img2.jpg"},
@@ -55,13 +36,6 @@ const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 9, notes:'Tiger4',image:"images/img9.jpg"},
              {id: 10, notes:'Tiger5',image:"images/img10.jpg"}];
 
-function ExamTable(){
-  return(
-    <ul className='exams'>
-      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' alt="image" src={exam.image}/></li> ) }
-    </ul>
-    );
-  }
 
 
 function ColorButton(){
@@ -94,9 +68,6 @@ function App() {
       <header className="App-header">
         <ColorButton/>
         <Effect/>
-        <p>
-          <ExamTable/>
-        </p>
         <p>
           {response}
         </p>
