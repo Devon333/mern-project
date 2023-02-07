@@ -16,10 +16,26 @@ function Effect(){
     }
       console.log(response.data);
     })
-  },[data]);
+  },[]);
   return(
     <div className="dataContainer">
-    {data.map((exam)=> <div>{exam.examId}    {exam.patientId}  {exam.age}   <img className='examImage' src={exam.imageURL}/> </div>)}
+      <table border='1'>
+      <tr>
+        <th>patient Id</th>
+        <th>key Findings</th>
+        <th>brixiaScores</th>
+        <th>bmi</th>
+        <th>imageURL</th>
+      </tr>
+      {data.map((exam)=>  
+        <tr>
+          <td>{exam.patientId}</td> 
+          <td>{exam.keyFindings}</td>
+          <td>{exam.brixiaScores}</td>
+          <td>{exam.bmi}</td>
+          <td> <img className='examImage' src={exam.imageURL}/> </td>
+        </tr>)}
+      </table>
     </div> 
   );
 }
