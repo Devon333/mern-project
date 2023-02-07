@@ -4,6 +4,9 @@ import { useApi } from './hooks/use-api';
 import {useState} from 'react';
 
 
+const exams2=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
+              {id: 2, notes:'Pots',image:"images/img2.jpg"},
+              {id: 3, notes:'More Pots',image:"images/img3.jpg"}];
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 2, notes:'Pots',image:"images/img2.jpg"},
@@ -14,38 +17,57 @@ const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 7, notes:'Tiger2',image:"images/img7.jpg"},
              {id: 8, notes:'Tiger3',image:"images/img8.jpg"},
              {id: 9, notes:'Tiger4',image:"images/img9.jpg"},
-             {id: 10, notes:'Tiger5',image:"images/img10.jpg"}];
+             {id: 10, notes:'Tiger5',image:"images/img11.jpg"}];
+
+            
+
 
 function ExamTable(){
   return(
     <ul className='exams'>
-      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> ) }
+      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> )}
     </ul>
+
+    );
+  }
+  
+  function ExamTable2(){
+    return(
+      <ul className='exams'>
+        { exams2.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> )}
+      </ul>
+    );
+  }
+
+function ImageSwitcher(){
+  const [active, setActive] = useState(false); // sets the initial state of the button
+  const [image, setImage] = useState({image1:"images/img1.jpg",image2:"images/img2.jpg"});  // sets the initial state of the image
+  function handleClick(){
+    setActive(!active);
+    setImage({image1:"images/img"+Math.floor(Math.random()*10)+".jpg",image2:"images/img"+Math.floor(Math.random()*10)+".jpg"}) // sets image to a random image
+  }
+  return(
+    <button className='imageSwitcher' onClick={handleClick}>
+      <img className='examImage' src={active ? image.image1 : image.image2}/>
+    </button> // if active is true, show image1, else show image2
     );
   }
 
 
-function ColorButton(){
-  const [count, setCount] = useState(0);
-  const [active, setActive] = useState(false);
-  const [color, setColor] = useState({o:250,tw:0,th:250});
+  function ExamTableToggle(){
+    const [active, setActive] = useState(false);
+    function handleClick(){
+      setActive(!active);
+    }
+    return(
+      <button className='examTableToggle' onClick={handleClick}>
+        {active ? 'Table 1' : 'Table 2'}
+        {active ? <ExamTable/> : <ExamTable2/>}
+      </button>
+      );
+    }
 
-  function handleClick(){
-    setCount(count+1);
-    setActive(!active);
-    setColor({o:Math.floor(Math.random()*250),tw:Math.floor(Math.random()*250),th:Math.floor(Math.random()*250)})    
-  }
-  return(
-    <button className='colorButton' onClick={handleClick}
-    style={{  
-      backgroundColor: "rgb("+color.o+","+color.tw+","+color.th+")"
-    }}
-
-    >
-      Click count:{count} RGB values:( {color.o}, {color.tw}, {color.th} )
-    </button>
-   );
-  }
+  
 
 
 function App() {
@@ -54,10 +76,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ColorButton/>
+        <ExamTableToggle/>
         <p>
-          <ExamTable/>
         </p>
+        <ImageSwitcher/>
+
         <p>
           {response}
         </p>
