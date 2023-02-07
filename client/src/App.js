@@ -5,25 +5,44 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 
 function Effect(){
-  const [data,setData] = useState("");
+  const [data,setData] = useState('');
+  const [content,setContent]=useState({});
+
+  const handleClick=(value)=>{
+    let test = String(value);
+    console.log(value);
+    axios
+    .get(test)
+    .then((response)=> {
+      console.log(response.data);
+      setContent((response.data.sprites));
+    })
+    return(
+      console.log("done here")
+    );  
+  };
+
 
   useEffect(() =>{
   axios
-    .get("https://jsonplaceholder.typicode.com/comments")
+    .get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")
     .then((response)=>{
-      console.log(response.data);
       if(data !== response.data){
-        setData(response.data);
+        setData(response.data.exams);
     }
+      console.log(response.data);
     })
   },[]);
-  return (
-   <ul>
-     { data.map(dat => <li postid={dat.postId}> userId={dat.id} name={dat.name} </li>)}
-   </ul>
-   );
+  return(
+    <div className="dataContainer">
+    {data.map((exam)=> <div>{exam.examId}    {exam.patientId}  {exam.age}   <img className='examImage' src={exam.imageURL}/> </div>)}
+    </div> 
+  );
 }
 
+const ApiCall=()=>{
+  console.log("Test");
+}
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 2, notes:'Pots',image:"images/img2.jpg"},
@@ -39,7 +58,7 @@ const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
 function ExamTable(){
   return(
     <ul className='exams'>
-      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> ) }
+      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' alt="image" src={exam.image}/></li> ) }
     </ul>
     );
   }
@@ -59,9 +78,8 @@ function ColorButton(){
     <button className='colorButton' onClick={handleClick}
     style={{  
       backgroundColor: "rgb("+color.o+","+color.tw+","+color.th+")"
-    }}
+    }}>
 
-    >
       Click count:{count} RGB values:( {color.o}, {color.tw}, {color.th} )
     </button>
    );
@@ -75,9 +93,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <ColorButton/>
-        <p>
-          <Effect/>
-        </p>
+        <Effect/>
         <p>
           <ExamTable/>
         </p>
