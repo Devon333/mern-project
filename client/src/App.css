@@ -16,35 +16,6 @@
   font-size: calc(10px + 2vmin);
 }
 
-.colorButton{
-  border-radius:10px;
-  border-style:solid;
-}
-
-.examImage{
-  height:100px;
-}
-
-
 .App-link {
   color: #61dafb;
 }
-
-.dataResponse{
-  width:70%;
-  border-style:solid;
-  border-radius:10px;
-}
-.picDiv{
-  display:inline-block;
-  width:32%;
-}
-.picDiv img{
-  height:100px;
-}
-.nameDiv{
-  width:20%;
-  display:inline-block;
- 
-}
-
