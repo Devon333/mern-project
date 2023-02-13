@@ -21,8 +21,12 @@ function Effect(){
       console.log("done here")
     );  
   };
+}
 
-
+const exams2=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
+             {id: 2, notes:'Pots',image:"images/img2.jpg"},
+             {id: 3, notes:'More Pots',image:"images/img3.jpg"},
+             {id: 4, notes:'Christmas Critters',image:"images/img4.jpg"}];
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 2, notes:'Pots',image:"images/img2.jpg"},
@@ -34,6 +38,7 @@ const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 8, notes:'Tiger3',image:"images/img8.jpg"},
              {id: 9, notes:'Tiger4',image:"images/img9.jpg"},
              {id: 10, notes:'Tiger5',image:"images/img11.jpg"}];
+            
 
             
 
@@ -55,7 +60,7 @@ function ExamTable(){
     );
   }
 
-function ImageSwitcher(){
+/* function ImageSwitcher(){
   const [active, setActive] = useState(false); // sets the initial state of the button
   const [image, setImage] = useState({image1:"images/img1.jpg",image2:"images/img2.jpg"});  // sets the initial state of the image
   function handleClick(){
@@ -72,7 +77,7 @@ function ImageSwitcher(){
       Click count:{count} RGB values:( {color.o}, {color.tw}, {color.th} )
     </button>
    );
-  }
+  } */
 
 
   function ExamTableToggle(){
@@ -97,11 +102,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ColorButton/>
-        <p>
-        </p>
-        <ImageSwitcher/>
-
+        <ExamTableToggle/>
         <p>
           {response}
         </p>
