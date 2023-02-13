@@ -2,6 +2,7 @@ import './App.css';
 
 import { useApi } from './hooks/use-api';
 import {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 function Effect(){
@@ -32,7 +33,8 @@ function Effect(){
         </tr>
         {data.map((exam) => 
           <tr>
-            <td>{exam.patientId}</td>
+            {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
+            <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
             <td>{exam.examId}</td>
             <td><img className = 'examImage' src={exam.imageURL} alt = {exam.keyFindings}/></td>
             <td>{exam.keyFindings}</td>
