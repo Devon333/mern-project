@@ -1,12 +1,28 @@
 import './App.css';
 
 import { useApi } from './hooks/use-api';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import axios from "axios";
+
+function Effect(){
+  const [data,setData] = useState('');
+  const [content,setContent]=useState({});
+
+  const handleClick=(value)=>{
+    let test = String(value);
+    console.log(value);
+    axios
+    .get(test)
+    .then((response)=> {
+      console.log(response.data);
+      setContent((response.data.sprites));
+    })
+    return(
+      console.log("done here")
+    );  
+  };
 
 
-const exams2=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
-              {id: 2, notes:'Pots',image:"images/img2.jpg"},
-              {id: 3, notes:'More Pots',image:"images/img3.jpg"}];
 
 const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
              {id: 2, notes:'Pots',image:"images/img2.jpg"},
@@ -25,7 +41,7 @@ const exams=[{id: 1, notes:'Christmas Carols.',image:"/images/img1.jpg"},
 function ExamTable(){
   return(
     <ul className='exams'>
-      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> )}
+      { exams.map(exam => <li key={exam.id}> {exam.notes} <img className='examImage' src={exam.image}/></li> ) }
     </ul>
 
     );
@@ -47,10 +63,15 @@ function ImageSwitcher(){
     setImage({image1:"images/img"+Math.floor(Math.random()*10)+".jpg",image2:"images/img"+Math.floor(Math.random()*10)+".jpg"}) // sets image to a random image
   }
   return(
-    <button className='imageSwitcher' onClick={handleClick}>
-      <img className='examImage' src={active ? image.image1 : image.image2}/>
-    </button> // if active is true, show image1, else show image2
-    );
+    <button className='colorButton' onClick={handleClick}
+    style={{  
+      backgroundColor: "rgb("+color.o+","+color.tw+","+color.th+")"
+    }}
+
+    >
+      Click count:{count} RGB values:( {color.o}, {color.tw}, {color.th} )
+    </button>
+   );
   }
 
 
@@ -76,7 +97,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ExamTableToggle/>
+        <ColorButton/>
         <p>
         </p>
         <ImageSwitcher/>
