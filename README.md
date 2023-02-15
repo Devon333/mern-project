@@ -1,4 +1,4 @@
-# MERN Template
+# Hack.Diversity Tech Dive Template
 
 ## Getting Started
 

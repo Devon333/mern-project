@@ -5,8 +5,5 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.send('API is working properly!');
 });
-router.get('/test', (req, res)=>{
-  res.send('API test is working properly!');
-});
 
 module.exports = router;
