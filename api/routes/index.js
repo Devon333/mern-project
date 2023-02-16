@@ -14,7 +14,7 @@ async function readExams(res){
       result.forEach((resu,i)=>{
         data.push({"id":resu._id,
                       "patientId":resu.PATIENT_ID,
-                      "Age":resu.AGE,
+                      "age":resu.AGE,
                       "sex":resu.SEX,
                       "zip":resu.ZIP,
                       "latest bmi":resu["LATEST_BMI"],

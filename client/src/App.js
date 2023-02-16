@@ -7,13 +7,15 @@ import axios from "axios";
 
 function Effect(){
   const [data,setData] = useState([]);
-
+  
   useEffect(() =>{
   axios
-    .get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")
+    .get("http://127.0.0.1:9000/exams")
+//    .get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")
     .then((response)=>{
       if(data !== response.data){
-        setData(response.data.exams);
+        console.log(response.data);
+        setData(response.data);
       }
       })
   },[]);
@@ -36,13 +38,13 @@ function Effect(){
             {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
             <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
             <td>{exam.examId}</td>
-            <td><img className = 'examImage' src={exam.imageURL} alt = {exam.keyFindings}/></td>
+            <td><img className = 'examImage' src={exam.filename} alt = {exam.keyFindings}/></td>
             <td>{exam.keyFindings}</td>
             <td>{exam.brixiaScores}</td>
-            <td>{exam.age}</td>
+            <td>{exam.Age}</td>
             <td>{exam.sex}</td>
-            <td>{exam.bmi}</td>
-            <td>{exam.zipCode}</td>
+            <td>{exam["latest bmi"]}</td>
+            <td>{exam.zip}</td>
           </tr>)
         }
       </table>
@@ -50,15 +52,15 @@ function Effect(){
   );
 }
 
+
 function ColorButton(){
   const [count, setCount] = useState(0);
   const [active, setActive] = useState(false);
   const [color, setColor] = useState({o:250,tw:0,th:250});
 
   function handleClick(){
-    setCount(count+1);
     setActive(!active);
-    setColor({o:Math.floor(Math.random()*250),tw:Math.floor(Math.random()*250),th:Math.floor(Math.random()*250)})    
+    //setImage({image1:"images/img"+Math.floor(Math.random()*10)+".jpg",image2:"images/img"+Math.floor(Math.random()*10)+".jpg"}) // sets image to a random image
   }
   return(
     <button className='colorButton' onClick={handleClick}
@@ -85,7 +87,43 @@ function NavBar() {
             </form>
           </div>
       </div></>
+      
   )
+}
+
+function Admin(){
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  function handleSubmit(event){
+    event.preventDefault();
+    if(password === "password"){
+      setIsCorrect(true);
+    }else{
+      setMessage("Incorrect password");
+    }
+  }
+
+  function handleChange(event){
+    setPassword(event.target.value);
+  }
+
+  return(
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Password:
+          <input type="password" value={password} onChange={handleChange}/>
+        </label>
+        <input type="submit" value="Submit"/>
+      </form>
+      <p>{message}</p>
+      {isCorrect && <p>Correct password</p>}
+    </div>
+  );
+
+  
 }
 
 function App() {
@@ -94,7 +132,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar/>       
+        <NavBar/>
+        <p>
+          <Admin/>
+        </p>       
         <p>
           <Effect/>
         </p>
@@ -106,6 +147,7 @@ function App() {
         </p>
       </header>
     </div>
+    
   );
 }
 
