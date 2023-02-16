@@ -7,7 +7,7 @@ import axios from "axios";
 
 function Effect(){
   const [data,setData] = useState([]);
-
+  
   useEffect(() =>{
   axios
     .get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")
@@ -50,6 +50,7 @@ function Effect(){
   );
 }
 
+
 function ColorButton(){
   const [count, setCount] = useState(0);
   const [active, setActive] = useState(false);
@@ -84,7 +85,43 @@ function NavBar() {
             </form>
           </div>
       </div></>
+      
   )
+}
+
+function Admin(){
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  function handleSubmit(event){
+    event.preventDefault();
+    if(password === "password"){
+      setIsCorrect(true);
+    }else{
+      setMessage("Incorrect password");
+    }
+  }
+
+  function handleChange(event){
+    setPassword(event.target.value);
+  }
+
+  return(
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Password:
+          <input type="password" value={password} onChange={handleChange}/>
+        </label>
+        <input type="submit" value="Submit"/>
+      </form>
+      <p>{message}</p>
+      {isCorrect && <p>Correct password</p>}
+    </div>
+  );
+
+  
 }
 
 function App() {
@@ -93,7 +130,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar/>       
+        <NavBar/>
+        <p>
+          <Admin/>
+        </p>       
         <p>
           <Effect/>
         </p>
@@ -105,6 +145,7 @@ function App() {
         </p>
       </header>
     </div>
+    
   );
 }
 
