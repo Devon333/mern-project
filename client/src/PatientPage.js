@@ -11,11 +11,11 @@ function PatientPage() {
     // Use useEffect hook to fetch patient data from API on component mount
     useEffect(() => {
         axios
-            .get(`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
+            .get(`http://127.0.0.1:9000/patient/${patientId}`)//`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
             .then((response) => {
-                setPatientData(response.data.exams);
+                setPatientData(response.data);
             })
-    }, []);
+    },[]);
 
     return (
         <div className="dataContainer">
@@ -44,7 +44,7 @@ function PatientPage() {
                             <td style={{ padding: "1em" }}>
                                 <img
                                     className="patientImage"
-                                    src={exam.imageURL}
+                                    src={exam.filename}
                                     alt={exam.keyFindings}
                                     style={{ height: "100px", width: "100px", objectFit: "cover" }}
                                 />

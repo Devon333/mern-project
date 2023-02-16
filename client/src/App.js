@@ -41,7 +41,7 @@ function Effect(){
             <td><img className = 'examImage' src={exam.filename} alt = {exam.keyFindings}/></td>
             <td>{exam.keyFindings}</td>
             <td>{exam.brixiaScores}</td>
-            <td>{exam.Age}</td>
+            <td>{exam.age}</td>
             <td>{exam.sex}</td>
             <td>{exam["latest bmi"]}</td>
             <td>{exam.zip}</td>
