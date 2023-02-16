@@ -11,7 +11,7 @@ function Effect(){
   useEffect(() =>{
   axios
     .get("http://127.0.0.1:9000/exams")
-//    .get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")
+    /*.get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")*/
     .then((response)=>{
       if(data !== response.data){
         console.log(response.data);

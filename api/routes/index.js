@@ -19,7 +19,7 @@ async function readExams(res){
                       "zip":resu.ZIP,
                       "latest bmi":resu["LATEST_BMI"],
                       "latest weight":resu["LATEST WEIGHT"],
-                      "filename":resu["png_filename"],
+                      "filename":"https://ohif-hack-diversity-covid.s3.amazonaws.com/covid-png/"+resu["png_filename"],
                       "exam_id":resu["exam_Id"],
                       "ICU Admit":resu["ICU Admit"],
                       "#ICU Admits":resu["# ICU admits"],
