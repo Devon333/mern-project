@@ -63,6 +63,7 @@ body{
 /* Style the links inside the navigation bar */
 .navBar a {
   float: left;
+  display: inline;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -83,13 +84,12 @@ body{
 }
 
 /* Style the search box inside the navigation bar */
-.navBar input[type=text] {
-  float: right;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
+.searchField{
+  width: 100;/* Full-width */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 16px; /* Increase font-size */
+  margin-bottom: 12px; /* Add some space below the input */
 }
 
 table, th, td {

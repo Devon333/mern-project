@@ -7,6 +7,8 @@ import axios from "axios";
 
 function Effect(){
   const [data,setData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   
   useEffect(() =>{
   axios
@@ -14,14 +16,29 @@ function Effect(){
     /*.get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")*/
     .then((response)=>{
       if(data !== response.data){
-        console.log(response.data);
         setData(response.data);
       }
       })
-  },[]);
+  },[]); 
+  
+  const searchItems = (searchValue) => { 
+    setSearchInput(searchValue)
+    if (searchInput !== '') {
+        const filteredData = data.filter((exam) => {
+            return Object.values(exam).join('').toLowerCase().includes(searchInput.toLowerCase())
+        })
+        setFilteredResults(filteredData)
+    }
+    else{
+        setFilteredResults(data)
+    }
+}
   return(
     <div className= "dataContainer">
-      <table border = '1'>
+      <div>
+        <input id="searchField" type="text" placeholder="Search.." onChange={(e)=> searchItems(e.target.value)} title="Type in parameters"></input>
+      </div>
+      <table id='examTable' border = '1'>
         <tr>
           <th>Patient ID</th>
           <th>Exam ID</th>
@@ -33,20 +50,39 @@ function Effect(){
           <th>BMI</th>
           <th>Zip Code</th>
         </tr>
-        {data.map((exam) => 
-          <tr>
-            {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
-            <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
-            <td>{exam.examId}</td>
-            <td><img className = 'examImage' src={exam.filename} alt = {exam.keyFindings}/></td>
-            <td>{exam.keyFindings}</td>
-            <td>{exam.brixiaScores}</td>
-            <td>{exam.age}</td>
-            <td>{exam.sex}</td>
-            <td>{exam["latest bmi"]}</td>
-            <td>{exam.zip}</td>
-          </tr>)
-        }
+        {/* If search term's length is greater than 1, filtered data will show. Otherwise, all data shown*/}
+        {searchInput.length > 1 ? 
+          (filteredResults.map((exam) => {
+            return(
+              <tr>
+                {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
+                <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
+                <td>{exam.examId}</td>
+                <td><img className = 'examImage' src={exam.filename} alt = {exam.keyFindings}/></td>
+                <td>{exam.keyFindings}</td>
+                <td>{exam.brixiaScores}</td>
+                <td>{exam.age}</td>
+                <td>{exam.sex}</td>
+                <td>{exam["latest bmi"]}</td>
+                <td>{exam.zip}</td>
+              </tr>)})
+          ) : (
+          data.map((exam) => {
+            return(
+              <tr>
+                {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
+                <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
+                <td>{exam.examId}</td>
+                <td><img className = 'examImage' src={exam.filename} alt = {exam.keyFindings}/></td>
+                <td>{exam.keyFindings}</td>
+                <td>{exam.brixiaScores}</td>
+                <td>{exam.age}</td>
+                <td>{exam.sex}</td>
+                <td>{exam["latest bmi"]}</td>
+                <td>{exam.zip}</td>
+              </tr>
+              )})
+          )}
       </table>
     </div>
   );
@@ -80,12 +116,6 @@ function NavBar() {
           <a class="active" href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
           <a href="#Exams">Exams</a>
           <a href="#Admin">Admin</a>
-          <div class="search-container">
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search.." name = "search"></input>
-              <button type="submit">Submit</button> 
-            </form>
-          </div>
       </div></>
       
   )
@@ -133,18 +163,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <NavBar/>
-        <p>
-          <Admin/>
-        </p>       
-        <p>
-          <Effect/>
-        </p>
-        <p>
-          <ColorButton/>
-        </p>
-        <p>
-          {response}
-        </p>
+        <p><Admin/></p>       
+        <p><Effect/></p>
+        <p><ColorButton/></p>
+        <p>{response}</p>
       </header>
     </div>
     
