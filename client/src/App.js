@@ -1,10 +1,10 @@
 import './App.css';
-
+import Login from './Pages/Login'
 import { useApi } from './hooks/use-api';
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-
+import LoginForm from './Pages/Login';
 function Effect(){
   const [data,setData] = useState([]);
   
@@ -75,11 +75,12 @@ function ColorButton(){
 }
 
 function NavBar() {
+  const path = window.location.pathname;
   return(
       <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div class="navBar">
           <a class="active" href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
           <a href="#Exams">Exams</a>
-          <a href="#Admin">Admin</a>
+          <a href="./Pages/Login">Admin</a>
           <div class="search-container">
             <form action="/action_page.php">
               <input type="text" placeholder="Search.." name = "search"></input>
@@ -89,48 +90,66 @@ function NavBar() {
       </div></>
       
   )
+
+  function  CustomLink({href, children}) {
+    return (
+      <li>
+        <a href="/login">{children}</a>
+      </li>
+    )
+  }
 }
 
 function Admin(){
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [isCorrect, setIsCorrect] = useState(false);
-
-  function handleSubmit(event){
-    event.preventDefault();
-    if(password === "password"){
-      setIsCorrect(true);
-    }else{
-      setMessage("Incorrect password");
-    }
-  }
-
-  function handleChange(event){
-    setPassword(event.target.value);
-  }
-
+  // create admin privilages such as adding new exams, deleting exams, and editing exams
   return(
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handleChange}/>
-        </label>
-        <input type="submit" value="Submit"/>
-      </form>
-      <p>{message}</p>
-      {isCorrect && <p>Correct password</p>}
+      <h1>Admin Page</h1>
     </div>
   );
 
-  
+
+
 }
 
 function App() {
   const { response } = useApi(); 
+  const adminUser ={
+    user: "admin",
+    password: "password"
+  }
+  
+  const [user, setUser] = useState({name:"", user:""});
+  const [error, setError] = useState("");
 
+  const Login = details =>{
+    console.log(details);
+
+    if (details.user == adminUser.user && details.password == adminUser.password){
+      console.log("Logged in");
+      setUser({
+        name: details.name,
+        user: details.user
+      });
+    }else{
+      console.log("Details do not match!");
+      setError("Details do not match!");
+    }
+  }
+
+  const Logout = () =>{
+    setUser({name:"", user:""});
+  }
   return (
     <div className="App">
+      {(user.user !== "") ? (
+        <div className="welcome">
+          <h2>Welcome, <span>{user.name}</span></h2>
+          <button onClick={Logout}>Logout</button>
+        </div>
+      ) : (
+        <LoginForm Login={Login} error={error}/>
+      )}
       <header className="App-header">
         <NavBar/>
         <p>
@@ -138,9 +157,6 @@ function App() {
         </p>       
         <p>
           <Effect/>
-        </p>
-        <p>
-          <ColorButton/>
         </p>
         <p>
           {response}
