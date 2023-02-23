@@ -27,6 +27,7 @@ function SignUpForm() {
             }),
         })
          navigate("/");
+         alert(`User Created! \n name:${name} \n user:${user} \n password:${password}`);
          }else{alert("fill all fields");}
 
         //Login(details);

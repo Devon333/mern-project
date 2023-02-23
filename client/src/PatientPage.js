@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import axios from "axios";
 
 function PatientPage() {
@@ -19,6 +19,8 @@ function PatientPage() {
 
     return (
         <div className="dataContainer">
+            {/*Link to Home page*/}
+            <Link to={"/home"}>Back</Link>
             {/* Display header with patientId */}
             <h1 style={{ textAlign: "center", marginBottom: "2em" }}>Information For Patient - {patientId}</h1>
             {/* Create table to display patient data */}
