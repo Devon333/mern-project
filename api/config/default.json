@@ -1,0 +1,9 @@
+{
+  "hack": {
+    "dbConfig": {
+      "host": "localhost",
+      "port": 9000,
+      "dbName":"mongodb+srv://hack:hack1@cluster0.2o7ugk3.mongodb.net/?retryWrites=true&w=majority" 
+    }
+  }
+}
