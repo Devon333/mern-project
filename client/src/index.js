@@ -5,8 +5,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PatientPage from './PatientPage';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import Home from './Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     {/* Wrap the application with a BrowserRouter component for routing */}
@@ -15,7 +19,10 @@ root.render(
         {/* Use Routes component for defining multiple routes */}
         <Routes>
           {/* Define the root route */}
-          <Route path="/" element={<App />} />
+          <Route path="/*" element={<App /> }/>
+          <Route path="/login" element={<Login  />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/home/:name" element={<Home />} /> 
           {/* Define the patient route with a parameter for the patient id */}
           <Route path="/patient/:patientId" element={<PatientPage />} />
         </Routes>
