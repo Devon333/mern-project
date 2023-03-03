@@ -1,3 +1,4 @@
+import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import axios from "axios";
@@ -48,7 +49,7 @@ function PatientPage() {
                                     className="patientImage"
                                     src={exam.filename}
                                     alt={exam.keyFindings}
-                                    style={{ height: "100px", width: "100px", objectFit: "cover" }}
+                                    style={{ height: "200px", width: "200px", objectFit: "cover" }}
                                 />
                             </td>
                             <td style={{ padding: "1em" }}>{exam.keyFindings}</td>

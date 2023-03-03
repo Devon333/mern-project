@@ -41,11 +41,11 @@ function Effect(){
     }
 }
   return(
-    <div className= "dataContainer">
-      <div>
-        <input id="searchField" type="text" placeholder="Search.." onChange={(e)=> searchItems(e.target.value)} title="Type in parameters"></input>
+    <div>
+      <div className="search">
+        <input classname="searchField" type="text" placeholder="Search.." onChange={(e)=> searchItems(e.target.value)} title="Type in parameters"></input>
       </div>
-      <table id='examTable' border = '1'>
+      <table id='examTable'>
         <tr>
           <th>Patient ID</th>
           <th>Exam ID</th>
@@ -120,16 +120,10 @@ function ColorButton(){
 function NavBar() {
   const path = window.location.pathname;
   return(
-      <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div className="navBar">
-          <a className="active" href="#home"><i className="fa fa-fw fa-home"></i>Home</a>
-          <a href="#Exams">Exams</a>
+      <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/><div className="navBar">
+          <a className="active" href="/"><i className="fa fa-fw fa-home"></i>Home</a>
+          <a href="/Exams">Exams</a>
           <a href="./Pages/Login">Admin</a>
-          {/*<div className="search-container">
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search.." name = "search"></input>
-              <button type="submit">Submit</button> 
-            </form>
-          </div>*/}
       </div></>
       
   )
@@ -160,18 +154,13 @@ console.log("username:",username,"\n auth:",auth);
 if(auth){
 return(
     <div className="App">
-      <header className="App-header">
+      <header>
         <NavBar/>
-        <p>
-        <div>
-          <h1>Welcome {username}</h1>
-        </div>
-          
-        </p>       
-        <p>
-          <Effect/>
-        </p>
       </header>
+      <body>
+          <h1>Welcome {username}</h1>  
+          <Effect/>
+      </body>
     </div>
   
   )
