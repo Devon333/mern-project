@@ -16,6 +16,7 @@ function Effect(){
   const [data,setData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [newExam , setNewExam] = useState(false);
   
   useEffect(() =>{
   axios
@@ -39,6 +40,10 @@ function Effect(){
     else{
         setFilteredResults(data)
     }
+    function Clicked() {
+      setNewExam(!newExam);
+    }
+    
 }
   return(
     <div className= "dataContainer">
@@ -56,7 +61,22 @@ function Effect(){
           <th>Sex</th>
           <th>BMI</th>
           <th>Zip Code</th>
+          <th><button className="newExamButton" onClick={Clicked}>New Exam</button></th>
         </tr>
+        { newExam  ?
+        (
+          <tr>
+          <td><input type="text" placeholder="Patient ID"></input></td>
+          <td><input type="text" placeholder="Exam ID"></input></td>
+          <td><input type="file" placeholder=""></input></td>
+          <td><input type="text" placeholder="Key Findings"></input></td>
+          <td><input type="text" placeholder="Brixia Score"></input></td>
+          <td><input type="text" placeholder="Age"></input></td>
+          <td><input type="text" placeholder="Sex"></input></td>
+          <td><input type="text" placeholder="BMI"></input></td>
+          <td><input type="text" placeholder="Zip Code"></input></td>
+          <td><button className="saveExamButton">Save</button></td>
+        </tr>) : (null)}
         {/* If search term's length is greater than 1, filtered data will show. Otherwise, all data shown*/}
         {searchInput.length > 1 ? 
           (filteredResults.map((exam) => {
@@ -72,10 +92,13 @@ function Effect(){
                 <td>{exam.sex}</td>
                 <td>{exam["latest bmi"]}</td>
                 <td>{exam.zip}</td>
-              </tr>)})
+              </tr>
+              
+              )})
           ) : (
           data.map((exam) => {
             return(
+              
               <tr>
                 {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
                 <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
@@ -87,13 +110,18 @@ function Effect(){
                 <td>{exam.sex}</td>
                 <td>{exam["latest bmi"]}</td>
                 <td>{exam.zip}</td>
+                <tr>
+                </tr>
               </tr>
               )})
           )}
+          {/* when */}
       </table>
     </div>
   );
 }
+
+
 
 
 function ColorButton(){
