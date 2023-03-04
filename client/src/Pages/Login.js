@@ -32,7 +32,7 @@ const LoginForm=({username, setUsername, auth, setAuth})=> {
             localStorage.setItem('username',result.name); 
             //return(<Route path="/home" element={<Home name="top"/>} />) 
             console.log(result);
-            navigate(<Home />); 
+            navigate("/home"); 
         }else{alert("Please enter correct details")}
     }
     return(
