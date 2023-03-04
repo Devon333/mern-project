@@ -27,11 +27,12 @@ const LoginForm=({username, setUsername, auth, setAuth})=> {
         })
           result = await result.json()
           console.warn(result,result.name);
-          if(result.login){ 
-            await setAuth(true,result.name);
+          if(result.login){
+            localStorage.setItem('auth',true);
+            localStorage.setItem('username',result.name); 
             //return(<Route path="/home" element={<Home name="top"/>} />) 
             console.log(result);
-            navigate(<Home username={username} auth={auth} />); 
+            navigate(<Home />); 
         }else{alert("Please enter correct details")}
     }
     return(
