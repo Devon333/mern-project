@@ -16,6 +16,7 @@ function Effect(){
   const [data,setData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [newExam , setNewExam] = useState(false);
   
   useEffect(() =>{
   axios
@@ -39,13 +40,17 @@ function Effect(){
     else{
         setFilteredResults(data)
     }
+    
 }
+  const clicked=()=>{
+      setNewExam(!newExam);
+    }
   return(
-    <div className= "dataContainer">
-      <div>
-        <input id="searchField" type="text" placeholder="Search.." onChange={(e)=> searchItems(e.target.value)} title="Type in parameters"></input>
+    <div>
+      <div className="search">
+        <input classname="searchField" type="text" placeholder="Search.." onChange={(e)=> searchItems(e.target.value)} title="Type in parameters"></input>
       </div>
-      <table id='examTable' border = '1'>
+      <table id='examTable'>
         <tr>
           <th>Patient ID</th>
           <th>Exam ID</th>
@@ -56,7 +61,22 @@ function Effect(){
           <th>Sex</th>
           <th>BMI</th>
           <th>Zip Code</th>
+          <th><button className="newExamButton" onClick={clicked}>New Exam</button></th>
         </tr>
+        { newExam  ?
+        (
+          <tr>
+          <td><input type="text" placeholder="Patient ID"></input></td>
+          <td><input type="text" placeholder="Exam ID"></input></td>
+          <td><input type="file" placeholder=""></input></td>
+          <td><input type="text" placeholder="Key Findings"></input></td>
+          <td><input type="text" placeholder="Brixia Score"></input></td>
+          <td><input type="text" placeholder="Age"></input></td>
+          <td><input type="text" placeholder="Sex"></input></td>
+          <td><input type="text" placeholder="BMI"></input></td>
+          <td><input type="text" placeholder="Zip Code"></input></td>
+          <td><button className="saveExamButton">Save</button></td>
+        </tr>) : (null)}
         {/* If search term's length is greater than 1, filtered data will show. Otherwise, all data shown*/}
         {searchInput.length > 1 ? 
           (filteredResults.map((exam) => {
@@ -72,10 +92,13 @@ function Effect(){
                 <td>{exam.sex}</td>
                 <td>{exam["latest bmi"]}</td>
                 <td>{exam.zip}</td>
-              </tr>)})
+              </tr>
+              
+              )})
           ) : (
           data.map((exam) => {
             return(
+              
               <tr>
                 {/* Create a link to the patient's information page with the patientId passed in as a parameter in the URL */}
                 <td><Link to={`/patient/${exam.patientId}`}>{exam.patientId}</Link></td>
@@ -87,13 +110,18 @@ function Effect(){
                 <td>{exam.sex}</td>
                 <td>{exam["latest bmi"]}</td>
                 <td>{exam.zip}</td>
+                <tr>
+                </tr>
               </tr>
               )})
           )}
+          {/* when */}
       </table>
     </div>
   );
 }
+
+
 
 
 function ColorButton(){
@@ -120,16 +148,10 @@ function ColorButton(){
 function NavBar() {
   const path = window.location.pathname;
   return(
-      <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div className="navBar">
-          <a className="active" href="#home"><i className="fa fa-fw fa-home"></i>Home</a>
-          <a href="#Exams">Exams</a>
+      <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/><div className="navBar">
+          <a className="active" href="/"><i className="fa fa-fw fa-home"></i>Home</a>
+          <a href="/Exams">Exams</a>
           <a href="./Pages/Login">Admin</a>
-          {/*<div className="search-container">
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search.." name = "search"></input>
-              <button type="submit">Submit</button> 
-            </form>
-          </div>*/}
       </div></>
       
   )
@@ -150,28 +172,22 @@ function Admin(){
       <h1>Welcome to  Page</h1>
     </div>
   );
+ }
 
-
-
-}
-
-function Home({username,auth}){
+function Home(){
+const username=localStorage.getItem('username');
+const auth = localStorage.getItem('auth');
 console.log("username:",username,"\n auth:",auth);
-if(auth){
+if(auth !==null ){
 return(
     <div className="App">
-      <header className="App-header">
+      <header>
         <NavBar/>
-        <p>
-        <div>
-          <h1>Welcome {username}</h1>
-        </div>
-          
-        </p>       
-        <p>
-          <Effect/>
-        </p>
       </header>
+      <body>
+          <h1>Welcome {username}</h1>  
+          <Effect/>
+      </body>
     </div>
   
   )

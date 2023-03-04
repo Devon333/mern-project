@@ -10,7 +10,7 @@ function NavBar() {
   const auth = localStorage.getItem("auth");
   const navigate = useNavigate();
   console.log("username:",username,"\n auth:",auth);
-  const path = window.location.pathname;
+  //const path = window.location.pathname;
 
   return(
       <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div className="navBar">
