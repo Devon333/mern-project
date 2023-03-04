@@ -7,6 +7,7 @@ import axios from "axios";
 function PatientPage() {
     // Declare state variable to store patient data
     const [patientData, setPatientData] = useState([{}]);
+    const [textData, setTextData] = useState({"examId":"",});
     // Use useParams hook to extract patientId from URL
     const { patientId } = useParams();
 
@@ -18,6 +19,13 @@ function PatientPage() {
                 setPatientData(response.data);
             })
     },[]);
+
+    const deleteExam=(e)=>{
+        alert('delete button clicked')
+    }
+    const updateExam=(e)=>{
+        alert('update button clicked')
+    }
     
     return (
         <div className="dataContainer">
@@ -41,9 +49,18 @@ function PatientPage() {
                 <tbody>
                     {/* Map over patientData array to display each exam data */}
                     {patientData.map((exam) => (
+                      
                         <tr style={{ borderBottom: "1px solid #ddd" }}>
                             {/* Display exam data in table cells */}
-                            <td style={{ padding: "1em" }}>{exam.examId}</td>
+                            <td style={{ padding: "1em" }}>
+                               <textarea name='examId' 
+                                         type='text'
+                                         placeholder={exam.examId} 
+                                         value={textData.examId} 
+                                         onChange={e=>{console.log(textData);setTextData({'examId':e.target.value})}} >
+                                           {exam.examId} 
+                              </textarea> 
+                            </td>
                             <td style={{ padding: "1em" }}>
                                 <img
                                     className="patientImage"
