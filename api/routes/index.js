@@ -17,7 +17,7 @@ async function readExams(res){
                       "age":resu.AGE,
                       "sex":resu.SEX,
                       "zip":resu.ZIP,
-                      "latest bmi":resu["LATEST_BMI"],
+                      "LATEST_BMI":resu["LATEST_BMI"],
                       "latest weight":resu["LATEST WEIGHT"],
                       "filename":"https://ohif-hack-diversity-covid.s3.amazonaws.com/covid-png/"+resu["png_filename"],
                       "examId":resu["exam_Id"],
@@ -29,6 +29,7 @@ async function readExams(res){
     }else{console.log('no data');}
     console.log(data.length);
     res.send(data);
+    client.close();
   }
 
 /* GET home page. */

@@ -31,7 +31,7 @@ function PatientPage() {
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Exam ID</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Image</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Key Findings</th>
-                        <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Brixia Score</th>
+                        <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>ICU Admit</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Age</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Sex</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>BMI</th>
@@ -53,11 +53,11 @@ function PatientPage() {
                                 />
                             </td>
                             <td style={{ padding: "1em" }}>{exam.keyFindings}</td>
-                            <td style={{ padding: "1em" }}>{exam.brixiaScores}</td>
+                            <td style={{ padding: "1em" }}>{exam["ICU Admit"]}</td>
                             <td style={{ padding: "1em" }}>{exam.age}</td>
                             <td style={{ padding: "1em" }}>{exam.sex}</td>
-                            <td style={{ padding: "1em" }}>{exam.bmi}</td>
-                            <td style={{ padding: "1em" }}>{exam.zipCode}</td>
+                            <td style={{ padding: "1em" }}>{exam["LATEST_BMI"]}</td>
+                            <td style={{ padding: "1em" }}>{exam.zip}</td>
                         </tr>
                     ))}
                 </tbody>

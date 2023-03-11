@@ -15,8 +15,14 @@ function NavBar() {
   return(
       <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div className="navBar">
           <a className="active" onClick={()=>{navigate("/home")}}>Home<i className="fa fa-fw fa-home"></i></a>
-          <a onClick={()=>{navigate("/home");}}>Exams</a>
-          <a href="./Pages/Login">Admin</a>
+          <a onClick={()=>{navigate("/admin")}}>Admin</a>
+          <a onClick={()=>{if(localStorage.getItem('isAdmin')){
+                             localStorage.removeItem('isAdmin'); 
+                             alert('Admin privileges dropped');
+                             window.location.reload(false);
+                             //navigate("/home");
+                           }else{
+                               alert(`No Admin privileges granted ${localStorage.getItem('isAdmin')}`)};}}>DropAdmin</a>
           <a onClick={()=>{localStorage.clear(); console.log("cleared localStorage"); navigate("/login")}}>Logout</a>
           {/*<div className="search-container">
             <form action="/action_page.php">

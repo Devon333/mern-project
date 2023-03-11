@@ -22,6 +22,7 @@ function App() {
   const auth = localStorage.getItem('auth');
   const username = localStorage.getItem('username');
   console.log(username, auth);
+  
   //const SetAuth= async (value1,value2)=>{
   //  console.log('using setAuth ',Authenticated, "setting username ",username);
   //  useEffect(()=>{

@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PatientPage from './PatientPage';
 import AdminPatientPage from './AdminPatientPage';
+import Admin from './Pages/Admin';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Home from './Home';
@@ -27,6 +28,7 @@ root.render(
           {/* Define the patient route with a parameter for the patient id */}
           <Route path="/patient/:patientId" element={<PatientPage />} />
           <Route path="/admin/patient/:patientId" element={<AdminPatientPage />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </BrowserRouter>

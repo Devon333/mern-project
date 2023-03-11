@@ -18,7 +18,7 @@ async function checkLogin(req,res){
        result[0].user==req.body.user && 
        result[0].password == req.body.password){
        console.log(result);
-       res.status(200).json({login:true, user:req.body.user, name:result[0].name})
+       res.status(200).json({admin:true, login:true, user:req.body.user, name:result[0].name})
         
        } else{
               res.status(200).json({login:false});
@@ -28,10 +28,10 @@ async function checkLogin(req,res){
          //}//catch(error){
           // res.status(500).json({error:"could not fetch documents"})
           //}
+  client.close();  
 }
 
-async function loginCheck(req,res){
-    
+async function loginCheck(req,res){  
   let users=[];
     const client = await new MongoClient(dbConfig);//"mongodb+srv://hack:hack1@cluster0.2o7ugk3.mongodb.net/?retryWrites=true&w=majority");
     const cursor = await client.db('database').collection('users').find({"user":req.body.user,"password":req.body.password});
@@ -49,6 +49,7 @@ async function loginCheck(req,res){
            res.status(500).json({error:"could not fetch documents"})
          }
     }
+  client.close();
 }
 
 
@@ -61,8 +62,12 @@ async function createUser(req,res){
     const client = await new MongoClient(dbConfig);//"mongodb+srv://hack:hack1@cluster0.2o7ugk3.mongodb.net/?retryWrites=true&w=majority");
     const result = await client.db('database').collection('users').insertOne({"name":req.body.name, "user":req.body.user,"password":req.body.password,});
     console.log(`New listing created with following id: ${result.insertedId}`);
+    client.close();
 }
 
+router.post("/admin",async(req,res)=>{
+  checkLogin(req,res); 
+});
 router.post("/",async(req,res)=>{
   checkLogin(req,res); 
 });
