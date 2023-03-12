@@ -24,6 +24,7 @@ async function readUsers(req,res){
         }catch(error){
           res.status(500).json({error:"could not fetch documents"})
         }
+    client.close();
 }
 
 
@@ -39,6 +40,7 @@ async function createUser(req,res){
     const client = await new MongoClient(dbConfig);//"mongodb+srv://hack:hack1@cluster0.2o7ugk3.mongodb.net/?retryWrites=true&w=majority");
     const result = await client.db('database').collection('users').insertOne({"name":req.body.name, "user":req.body.user,"password":req.body.password,});
     console.log(`New listing created with following id: ${result.insertedId}`);
+    client.close();
 }
 
 router.post("/",async(req,res)=>{

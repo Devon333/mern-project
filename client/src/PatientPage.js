@@ -1,5 +1,7 @@
+import './App.css';
+import NavBar from './NavBar';
 import React, { useState, useEffect } from 'react';
-import { useParams,Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 
 function PatientPage() {
@@ -16,11 +18,10 @@ function PatientPage() {
                 setPatientData(response.data);
             })
     },[]);
-
+    
     return (
         <div className="dataContainer">
-            {/*Link to Home page*/}
-            <Link to={"/home"}>Back</Link>
+            <NavBar />
             {/* Display header with patientId */}
             <h1 style={{ textAlign: "center", marginBottom: "2em" }}>Information For Patient - {patientId}</h1>
             {/* Create table to display patient data */}
@@ -30,7 +31,7 @@ function PatientPage() {
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Exam ID</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Image</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Key Findings</th>
-                        <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Brixia Score</th>
+                        <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>ICU Admit</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Age</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>Sex</th>
                         <th style={{ borderBottom: "2px solid #ddd", padding: "1em" }}>BMI</th>
@@ -48,15 +49,15 @@ function PatientPage() {
                                     className="patientImage"
                                     src={exam.filename}
                                     alt={exam.keyFindings}
-                                    style={{ height: "100px", width: "100px", objectFit: "cover" }}
+                                    style={{ height: "200px", width: "200px", objectFit: "cover" }}
                                 />
                             </td>
                             <td style={{ padding: "1em" }}>{exam.keyFindings}</td>
-                            <td style={{ padding: "1em" }}>{exam.brixiaScores}</td>
+                            <td style={{ padding: "1em" }}>{exam["ICU Admit"]}</td>
                             <td style={{ padding: "1em" }}>{exam.age}</td>
                             <td style={{ padding: "1em" }}>{exam.sex}</td>
-                            <td style={{ padding: "1em" }}>{exam.bmi}</td>
-                            <td style={{ padding: "1em" }}>{exam.zipCode}</td>
+                            <td style={{ padding: "1em" }}>{exam["LATEST_BMI"]}</td>
+                            <td style={{ padding: "1em" }}>{exam.zip}</td>
                         </tr>
                     ))}
                 </tbody>
