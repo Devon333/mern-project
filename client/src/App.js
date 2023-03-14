@@ -21,6 +21,7 @@ function App() {
   //const [username, setUsername]=useState("");
   const auth = localStorage.getItem('auth');
   const username = localStorage.getItem('username');
+  console.log(process.env.REACT_APP_BACKEND_URL) 
   console.log(username, auth);
   
   //const SetAuth= async (value1,value2)=>{
@@ -34,7 +35,7 @@ function App() {
   //}
   return (
         <>
-          {auth !== null ? 
+          {auth !== null ?
             <Home username={username} auth={auth} />  : 
             <Login username={username} auth={auth} /> 
           }
