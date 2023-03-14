@@ -24,7 +24,7 @@ root.render(
           <Route path="/*" element={<App /> }/>
           <Route path="/login" element={<Login  />} />
           <Route path="/register" element={<SignUp />} />
-          <Route path="/home/:name" element={<Home />} /> 
+          <Route path="/home" element={<Home />} /> 
           {/* Define the patient route with a parameter for the patient id */}
           <Route path="/patient/:patientId" element={<PatientPage />} />
           <Route path="/admin/patient/:patientId" element={<AdminPatientPage />} />
