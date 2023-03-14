@@ -13,7 +13,7 @@ function PatientPage() {
     // Use useEffect hook to fetch patient data from API on component mount
     useEffect(() => {
         axios
-            .get(`http://127.0.0.1:9000/patient/${patientId}`)//`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
+            .get(`${process.env.REACT_APP_BACKEND_URL}/patient/${patientId}`)//`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
             .then((response) => {
                 setPatientData(response.data);
             })

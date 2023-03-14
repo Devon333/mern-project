@@ -15,7 +15,7 @@ function PatientPage() {
     // Use useEffect hook to fetch patient data from API on component mount
     useEffect(() => {
         axios
-            .get(`http://127.0.0.1:9000/patient/${patientId}`)//`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
+            .get(`${process.env.REACT_APP_BACKEND_URL}/patient/${patientId}`)//`https://czi-covid-lypkrzry4q-uc.a.run.app/api/patient/${patientId}`)
             .then((response) => {
                 setPatientData(response.data);
             })
@@ -27,7 +27,7 @@ const handleDelete = (e) => {
     e.preventDefault()
     const id = e.target.value;
     console.log(id);
-    axios.delete(`http://localhost:9000/patient/${patientId}/${id}`)
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL+}/patient/${patientId}/${id}`)
         .then(() => {
             // Alert and redirect to home after successful delete
             alert("Patient data deleted successfully!");
@@ -54,7 +54,7 @@ const handleDelete = (e) => {
             console.log(JSON.stringify(textData));
             if(textData){
              alert(`data sent ${JSON.stringify(textData)} `);
-              fetch("http://localhost:9000/patient/updateExam",{
+              fetch(process.env.REACT_APP_BACKEND_URL+"/patient/updateExam",{
               method:"POST",
               crossDomain:true,
               headers:{
