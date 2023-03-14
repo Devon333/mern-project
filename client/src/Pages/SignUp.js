@@ -12,7 +12,7 @@ function SignUpForm() {
         console.log(details);
         const {name, user, password } = details;
         if(user != "" && password !="" && name !=""){
-          fetch("http://localhost:9000/register",{
+          fetch(process.env.REACT_APP_BACKEND_URL+"/register",{
           method:"POST",
           crossDomain:true,
           headers:{

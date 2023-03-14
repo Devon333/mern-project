@@ -12,7 +12,7 @@ const AdminForm=({username, setUsername, auth, setAuth})=> {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        let result = await fetch("http://localhost:9000/login/admin",{
+        let result = await fetch(process.env.REACT_APP_BACKEND_URL+"/login/admin",{
           method:"POST",
           crossDomain:true,
           headers:{

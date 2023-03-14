@@ -23,7 +23,7 @@ function Effect(){
   const [examData, setExamData] = useState({}); 
   useEffect(() =>{
   axios
-    .get("http://127.0.0.1:9000/exams")
+    .get(process.env.REACT_APP_BACKEND_URL+"/exams")
     /*.get("https://czi-covid-lypkrzry4q-uc.a.run.app/api/exams")*/
     .then((response)=>{
       if(data !== response.data){
@@ -39,7 +39,7 @@ function saveExam(e){
     //console.log(Object.keys(examData).length);
     alert(`fill in atleast 4 fields`);
   }else{
-    fetch("http://localhost:9000/patient/insertExam",{
+    fetch(process.env.REACT_APP_BACKEND_URL+"/patient/insertExam",{
           method:"POST",
           crossDomain:true,
           headers:{
