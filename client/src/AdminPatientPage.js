@@ -27,7 +27,7 @@ const handleDelete = (e) => {
     e.preventDefault()
     const id = e.target.value;
     console.log(id);
-    axios.delete(`${process.env.REACT_APP_BACKEND_URL+}/patient/${patientId}/${id}`)
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/patient/${patientId}/${id}`)
         .then(() => {
             // Alert and redirect to home after successful delete
             alert("Patient data deleted successfully!");
