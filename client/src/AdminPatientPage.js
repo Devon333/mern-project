@@ -66,9 +66,9 @@ const handleDelete = (e) => {
               "Access-Control-Allow-Origin":"*",
               },
                 body: JSON.stringify(textData),
-              })
+              }).then(() =>
               //window.location.reload(false);
-              navigate(`/admin/patient/${patientId}`)
+              navigate(`/admin/patient/${patientId}`) )
               //window.location.href = `/admin/patient/${patientId}`;
              
              }
