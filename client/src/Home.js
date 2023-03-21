@@ -54,6 +54,7 @@ function saveExam(e){
       setNewExam(false);
       console.log(examData);
       alert("Data sent to the api")
+      window.location.href = `/`;
     }
 }
   
