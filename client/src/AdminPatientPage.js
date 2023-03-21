@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-function PatientPage() {
+function AdminPatientPage() {
     // Declare state variable to store patient data
     const [patientData, setPatientData] = useState([{}]);
     const { patientId } = useParams();
@@ -32,7 +32,7 @@ const handleDelete = (e) => {
         .then(() => {
             // Alert and redirect to home after successful delete
             alert("Patient data deleted successfully!");
-            navigate(`/admin/patient/${exam.patientId}`)
+            navigate(`/admin/patient/${patientId}`)
             //window.location.reload(false);
             //window.location.href = `/admin/patient/${patientId}`;
         })
@@ -68,7 +68,7 @@ const handleDelete = (e) => {
                 body: JSON.stringify(textData),
               })
               //window.location.reload(false);
-              navigate(`/admin/patient/${exam.patientId}`)
+              navigate(`/admin/patient/${patientId}`)
               //window.location.href = `/admin/patient/${patientId}`;
              
              }
@@ -184,4 +184,4 @@ const handleDelete = (e) => {
 }
 
 // Export the component be used in other parts of the application
-export default PatientPage;
+export default AdminPatientPage;
