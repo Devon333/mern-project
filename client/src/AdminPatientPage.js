@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './NavBar';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function PatientPage() {
@@ -9,6 +9,7 @@ function PatientPage() {
     const [patientData, setPatientData] = useState([{}]);
     const { patientId } = useParams();
     const [textData, setTextData] = useState({"PATIENT_ID":patientId});
+    const navigate = useNavigate(); 
     //const [textData, setTextData] = useState({"examId":"","keyFindings":"","age":"","sex":"","bmi":"","zip":""});
     // Use useParams hook to extract patientId from URL
     // setTextData({"patientId":patientId});
@@ -31,7 +32,8 @@ const handleDelete = (e) => {
         .then(() => {
             // Alert and redirect to home after successful delete
             alert("Patient data deleted successfully!");
-            window.location.href = `/admin/patient/${patientId}`;
+            window.location.reload(false);
+            //window.location.href = `/admin/patient/${patientId}`;
         })
         .catch((error) => {
             console.log(error);
@@ -64,7 +66,8 @@ const handleDelete = (e) => {
               },
                 body: JSON.stringify(textData),
               })
-              window.location.href = `/admin/patient/${patientId}`;
+              window.location.reload(false);
+              //window.location.href = `/admin/patient/${patientId}`;
              
              }
           }
