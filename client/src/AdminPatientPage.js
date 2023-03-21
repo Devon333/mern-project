@@ -32,7 +32,8 @@ const handleDelete = (e) => {
         .then(() => {
             // Alert and redirect to home after successful delete
             alert("Patient data deleted successfully!");
-            window.location.reload(false);
+            navigate(`/admin/patient/${exam.patientId}`)
+            //window.location.reload(false);
             //window.location.href = `/admin/patient/${patientId}`;
         })
         .catch((error) => {
@@ -66,7 +67,8 @@ const handleDelete = (e) => {
               },
                 body: JSON.stringify(textData),
               })
-              window.location.reload(false);
+              //window.location.reload(false);
+              navigate(`/admin/patient/${exam.patientId}`)
               //window.location.href = `/admin/patient/${patientId}`;
              
              }
