@@ -64,6 +64,8 @@ const handleDelete = (e) => {
               },
                 body: JSON.stringify(textData),
               })
+              window.location.href = `/admin/patient/${patientId}`;
+             
              }
           }
     }

@@ -14,7 +14,7 @@ function NavBar() {
 
   return(
       <><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link><div className="navBar">
-          <a className="active" onClick={()=>{navigate("/home")}}>Home<i className="fa fa-fw fa-home"></i></a>
+          <a className="active" onClick={()=>{navigate("/")}}>Home<i className="fa fa-fw fa-home"></i></a>
           <a onClick={()=>{navigate("/admin")}}>Admin</a>
           <a onClick={()=>{if(localStorage.getItem('isAdmin')){
                              localStorage.removeItem('isAdmin'); 
